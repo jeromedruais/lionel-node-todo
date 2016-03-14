@@ -5,19 +5,7 @@ var favicon = require('serve-favicon');
 var app = express();
 var bodyParser = require('body-parser')
 
-// load local VCAP configuration
-var vcapLocal = null
-try {
-  vcapLocal = require("./vcap-local.json");
-  console.log("Loaded local VCAP", vcapLocal);
-} catch (e) {
-  console.error(e);
-}
-
-var appEnvOpts = vcapLocal ? {
-  vcap: vcapLocal
-} : {}
-var appEnv = cfenv.getAppEnv(appEnvOpts);
+var appEnv = cfenv.getAppEnv();
 
 app.use(bodyParser.urlencoded({
   extended: false
