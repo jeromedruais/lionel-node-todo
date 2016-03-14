@@ -1,19 +1,10 @@
-module.exports = function (app, todoDb) {
+module.exports = function (app) {
+
+  var todos = [];
+  var todoIdCount = 0;
 
   function getTodos(res) {
-    todoDb.list({
-      include_docs: true
-    }, function (err, body) {
-      if (err) {
-        res.status(500).send({
-          error: err
-        });
-      } else {
-        res.send(body.rows.map(function (row) {
-          return row.doc;
-        }));
-      }
-    });
+    res.send(todos);
   }
 
   // api ---------------------------------------------------------------------
@@ -24,32 +15,22 @@ module.exports = function (app, todoDb) {
 
   // create todo and send back all todos after creation
   app.post('/api/todos', function (req, res) {
-    todoDb.insert({
+    todos.push({
       type: "todo",
       text: req.body.text,
-      done: false
-    }, function (err, todo) {
-      if (err) {
-        res.status(500).send({
-          error: err
-        });
-      } else {
-        getTodos(res);
-      }
+      done: false,
+      _id: (todoIdCount++),
+      _rev: 0
     });
+    getTodos(res);
   });
 
   // delete a todo
   app.delete('/api/todos/:id', function (req, res) {
-    todoDb.destroy(req.params.id, req.query.rev, function (err, body) {
-      if (err) {
-        res.status(500).send({
-          error: err
-        });
-      } else {
-        getTodos(res);
-      }
+    todos = todos.filter(function (todo) {
+      return !(todo._id == req.params.id && todo._rev == req.query.rev);
     });
+    getTodos(res);
   });
 
 };

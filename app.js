@@ -24,14 +24,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json()); // parse application/json
 
-require("./app/database.js")(appEnv, "todo-cloudant", "todos", function (err, database) {
-  if (err) {
-    console.log(err);
-  } else {
-    // database is initialized, install our CRUD route for Todo objects
-    require('./app/todos.js')(app, database);
-  }
-});
+require('./app/todos.js')(app);
 
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(favicon(__dirname + '/public/icons/favicon.ico'));
