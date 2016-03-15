@@ -125,6 +125,8 @@ It has **1024MB** of disk space available.
   https://api.eu-gb.bluemix.net or https://api.au-syd.bluemix.net
   based on where you decided to create your application.
 
+  Note: you might need to use *cf login --skip-ssl-validation* if your certificate registry is too old.
+  
 1. Push the app to Bluemix:
 
   ```
@@ -148,9 +150,15 @@ In a previous step we set up a Git repository and a build pipeline was automatic
 1. Commit your changes locally
 
   ```
-  $ git commit -a -m 'updated title'
+  $ git commit -a -m "updated title"
   ```
 
+  Note: you might be prompted to configure git for the first time:
+  ```
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+  ```
+  
 1. From your application overview in the Bluemix console, open your project page in the Bluemix DevOps console.
 
 1. Click the *Build and Deploy* button to access the build pipeline that was created automatically in a previous step.
@@ -190,7 +198,7 @@ Your first task is to integrate it in the app you created, replacing the existin
 and the directories
 **app**,
 **public**
-from the **node-todo-tutorial** folder to your app folder.
+from the **node-todo-tutorial** folder to your app folder overriding the existing files.
 
   ```
   mv .bowerrc bower.json .cfignore .gitignore app.js package.json app public [your-app-directory]
@@ -225,7 +233,7 @@ from the **node-todo-tutorial** folder to your app folder.
 1. Commit:
 
   ```
-  $ git commit -a -m 'in-memory implementation'
+  $ git commit -a -m "in-memory implementation"
   ```
 
 1. Push to remote Git
@@ -354,7 +362,8 @@ to test for this file in your app and to load the values if found.
 
 ### Where is the solution?
 
-A full working version using Cloudant as persistence can be found
+If you're stuck and need some help to connect the Cloudant database,
+a full working version using Cloudant as persistence can be found
 in the [master branch](https://github.com/lionelmace/node-todo) of this repository.
 
 ## License
