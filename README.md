@@ -47,7 +47,7 @@ an automatic build pipeline to our project.
 1. Leave the default options selected and continue.
 
 Bluemix DevOps creates a Git repository for your application,
-puts in it the starter code for the "Hi there!" applicatio,
+puts in it the starter code for the "Hi there!" application,
 and defines a build pipeline so that your app gets automatically
 redeployed after every commit.
 
@@ -80,7 +80,7 @@ redeployed after every commit.
   The console output will look like:
   
   ```
-  > NodejsStarterApp@0.0.1 start /Users/fred/tmp/fredl-todo-todelete
+  > NodejsStarterApp@0.0.1 start /Users/john/dev/node-todo
   > node app.js
   
   server starting on http://localhost:6021
