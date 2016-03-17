@@ -1,19 +1,19 @@
 # Todo App Tutorial
 
-This is a sample application built with Node.JS and IBM Cloudant.
+This is a sample application built with a CLEAN stack (CLoudant NoSQL database, Express, Angular and Node.js).
 
-It is split in two Git branches:
-  * the *[master](https://github.com/lionelmace/node-todo/tree/master)* holds the final application
-  * the *[tutorial](https://github.com/lionelmace/node-todo/tree/tutorial)* starts with an in-memory
+![Todo](screenshot.png)
+
+This Git tutorial is split in two branches:
+  * *[master](https://github.com/lionelmace/node-todo/tree/master)* holds the final application
+  * *[tutorial](https://github.com/lionelmace/node-todo/tree/tutorial)* starts with an in-memory
 implementation of the Todo App and guide you through the steps of adding a persistent datastore.
 
 For this tutorial, you will need:
-  * a Bluemix account,
+  * a IBM Bluemix account,
   * the Cloud Foundry command line tool,
   * a Git client,
-  * a Node.js installation.
-  
-![Todo](screenshot.png)
+  * Node.js.
 
 ## Getting ready
 
@@ -25,13 +25,15 @@ For this tutorial, you will need:
 
 ## Create a new web application
 
-1. Log in the Bluemix console.
+1. Log in to Bluemix console.
+
+1. Select the region where you want to create your application.
 
 1. Go to the Bluemix catalog.
 
-1. Create a new Cloud Foundry application with the SDK for Node.js under the Compute category.
+1. Create a new Cloud Foundry (CF) application with the SDK for Node.js under the Compute category.
 
-1. Give your app a unique name.
+1. Give your app a unique name and unique host (eg. todo-[your-initials])
 
 1. View your application.
 
@@ -50,6 +52,8 @@ Bluemix DevOps creates a Git repository for your application,
 puts in it the starter code for the "Hi there!" application,
 and defines a build pipeline so that your app gets automatically
 redeployed after every commit.
+
+1. Make note of the Git URL
 
 ## Checkout the code locally
 
@@ -80,7 +84,7 @@ redeployed after every commit.
   The console output will look like:
   
   ```
-  > NodejsStarterApp@0.0.1 start /Users/john/dev/node-todo
+  > NodejsStarterApp@0.0.1 start /Users/john/dev/todo-[your-initials]
   > node app.js
   
   server starting on http://localhost:6021
@@ -105,8 +109,8 @@ A default manifest.yml file was generated for our app. It looks like:
     memory: 256M
     instances: 1
     domain: eu-gb.mybluemix.net
-    name: node-todo-tutorial
-    host: node-todo-tutorial
+    name: todo-[your-initials]
+    host: todo-[your-initials]
     disk_quota: 1024M
   ```
 
@@ -121,8 +125,11 @@ It has **1024MB** of disk space available.
   $ cf login
   ```
 
-  Note: your API endpoint will be one of https://api.ng.bluemix.net,
-  https://api.eu-gb.bluemix.net or https://api.au-syd.bluemix.net
+  Note: your API endpoint will be one of:
+  * https://api.ng.bluemix.net
+  * https://api.eu-gb.bluemix.net
+  * or https://api.au-syd.bluemix.net
+  
   based on where you decided to create your application.
 
   Note: you might need to use *cf login --skip-ssl-validation* if your certificate registry is too old.
@@ -135,6 +142,19 @@ It has **1024MB** of disk space available.
 
 1. When the command completes, access the application running
 in the cloud to confirm your change was deployed
+
+  ```
+  requested state: started
+  instances: 1/1
+  usage: 256M x 1 instances
+  urls: todo-[your-initials].eu-gb.mybluemix.net
+  last uploaded: Thu Mar 14 15:24:17 UTC 2016
+  stack: cflinuxfs2
+  buildpack: SDK for Node.js(TM) (ibm-node.js-4.3.0, buildpack-v3.1-20160222-1123)
+
+       state     since                    cpu    memory          disk          details   
+  #0   running   2016-03-14 04:25:24 PM   0.0%   75.9M of 256M   92.5M of 1G      
+  ```
 
 Changing files locally and pushing them worked but we can do better.
 In a previous step we set up a Git repository and a build pipeline was automatically configured.
@@ -179,30 +199,16 @@ in the cloud to confirm your change was deployed
 In previous steps, we've seen the basic of modifying code and deploying the application.
 Now let's focus on our task to build a Todo App.
 
-A first version of the application has already been developed and is available in this Github repository.
-Your first task is to integrate it in the app you created, replacing the existing app code.
+A first version of the application has already been developed and is available in this Git repository.
+Your first task is to integrate this code in the app you created, replacing the existing app code.
 
-1. Delete the **public** directory in your app. We will replace it in the next steps.
+1. Delete all files and folders from your app **except the manifest.yml and .git folder**.
 
 1. Download the Todo App in-memory application from [this archive](https://github.com/lionelmace/node-todo/archive/tutorial.zip) into a temp directory.
 
 1. Unzip the files in a temp directory. It creates a *node-todo-tutorial* folder.
 
-1. Move the files
-**app.js**,
-**package.json**,
-**.bowerrc**,
-**bower.json**,
-**.cfignore**,
-**.gitignore**
-and the directories
-**app**,
-**public**
-from the **node-todo-tutorial** folder to your app folder overriding the existing files.
-
-  ```
-  mv .bowerrc bower.json .cfignore .gitignore app.js package.json app public [your-app-directory]
-  ```
+1. Move all files and directories from the extract to your app folder **except the manifest.yml**.
 
 ## Run the Todo App locally
 
@@ -380,4 +386,4 @@ This is a sample application created for the purpose of demonstration and learni
 The program is provided as-is with no warranties of any kind, express or implied.
 
 [bluemix_signup_url]: https://console.ng.bluemix.net/?cm_mmc=GitHubReadMe-_-BluemixSampleApp-_-Node-_-Workflow
-[cloud_foundry_url]: https://github.com/cloudfoundry/cli
+[cloud_foundry_url]: https://github.com/cloudfoundry/cli/releases
