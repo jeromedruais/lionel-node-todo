@@ -308,7 +308,7 @@ Before starting to modify the app, let's get familiar with its content:
 
 ## Now it's up to you!
 
-In the previous steps, you with:
+In the previous steps:
 * you deployed an app in the cloud in few steps;
 * you set up a source code repository to collaborate;
 * you got a build pipeline to deploy your changes in the cloud
