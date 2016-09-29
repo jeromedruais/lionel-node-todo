@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Optimize mobile viewport -->
 
-  <title>Todo App</title>
+  <title>Jerome Todo App</title>
 
   <!-- load bootstrap -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
@@ -27,7 +27,7 @@
 
     <!-- HEADER AND TODO COUNT -->
     <div class="jumbotron text-center">
-      <h1><span class="label label-info">{{ todos.length }}</span> Todos</h1>
+      <h1><span class="label label-info">{{ todos.length }}</span> My list of Todos</h1>
     </div>
 
     <!-- FORM TO CREATE TODOS -->
@@ -37,7 +37,7 @@
           <div class="form-group">
 
             <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-            <input type="text" class="form-control input-lg text-center" placeholder="Add a new todo" ng-model="formData.text" required>
+            <input type="text" class="form-control input-lg text-center" placeholder="what do you want to do - Add a new todo" ng-model="formData.text" required>
 
             <!-- createToDo() WILL CREATE NEW TODOS -->
             <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
